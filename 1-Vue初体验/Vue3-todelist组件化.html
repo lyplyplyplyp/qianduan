@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .finished{
+      text-decoration: line-through;
+      color: red;
+    }
+  </style>
+</head>
+<body>
+<div>
+  <div id="app"></div>
+  <input v-model="inputValue"/>
+  <button v-on:click="handleAddItem">增加</button>
+  <ul>
+    <li 
+    v-for="(item,index) of list"
+    :class="{finished:item.finished}"
+    @click="item.finished=!item.finished"
+    >
+     {{item.title}}
+    </li>
+  </ul>
+</div>
+</div>
+  <script src="https://unpkg.com/vue@next"></script>
+  <script>
+    //mvvm,vue实例，vue组件
+    const app=Vue.createApp({
+      data(){
+        return{
+          inputValue:"",
+          list:[
+            {
+              title:"上课",
+              finished:true
+            },
+            {
+              title:"打游戏",
+              finished:true
+            },
+            {
+              title:"吃饭",
+              finished:false
+            },
+          ],
+        }
+      },
+      methods: {
+        handleAddItem(){
+          const item={
+            title:this.inputValue,
+            finished:false,
+          };
+          this.list.push(item);
+          this.inputValue="";
+        },
+      },
+//       template:`
+//        <div>
+//         <input v-model="inputValue">
+//         <button v-on:click="handleAddItem" v-bind:title="inputValue">增加</button>
+//         <ul>
+//        <todo-item v-for="(item,index) of list"
+//        v-bind:content="item"
+//        v-bind:index="index"
+//            />
+//           </ul>
+//         </div>
+//       `,
+//     });
+//     app.component('todo-item',{
+// props:["content","index"],
+// template:"<li>{{index}}——{{content}}</li>",
+    }).mount("#app");
+  </script>
+</body>
+</html>

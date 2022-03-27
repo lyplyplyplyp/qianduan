@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <!-- 单选 -->
+    <h2>请选择性别</h2>
+    <h3>你的选择是{{gender}}</h3>
+    
+    <label for="male">男
+      <input type="radio" id="male" value="男" v-model="gender" checked/>
+    </label>
+    
+    <label for="female">女
+      <input type="radio" id="female" value="女" v-model="gender"/>
+    </label>
+    <hr />
+    <!-- 复选框 -->
+    <h2>选择技术栈</h2>
+    <h3>你的选择是{{checks}}</h3>
+    <label for="springboot">
+      <input 
+        type="checkbox" 
+        id="springboot" 
+        value="springboot" 
+        v-model="checks">
+        springboot
+    </label>
+    <label for="vue">
+      <input 
+        type="checkbox" 
+        id="spvue" 
+        value="vue" 
+        v-model="checks">
+        vue
+    </label>
+    <label for="linux">
+      <input 
+        type="checkbox" 
+        id="linux" 
+        value="linux" 
+        v-model="checks">
+        linux
+    </label>
+  </div>
+  <script src="https://unpkg.com/vue@next"></script>
+  <script>
+    let app=Vue.createApp({
+      data() {
+        return {
+          gender:"",
+          checks:["springboot"],
+        }
+      },
+    })
+    let vm=app.mount("#app");
+  </script>
+</body>
+</html>

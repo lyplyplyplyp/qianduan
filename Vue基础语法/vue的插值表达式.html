@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>vue的插值表达式</title>
+</head>
+<body>
+  
+<div  id="root">
+  <!-- 用插值直接显示变量 -->
+  <p>{{firstname}} {{lastName}}</p>
+  <!-- 使用访问变量的属性 -->
+  <p>{{firstname.length}}</p>
+  <!-- 字符串的拼接 -->
+  <p>{{firstname+"----"+lastName}}</p>
+  <!--简单的算数运算 -->
+  <p>{{count*2}}</p>
+  <!-- 三目运算 -->
+  <p>{{firstname==='Stephen'?"dw":"haihao"}}</p>
+  <!-- 调用自定义函数 -->
+  <p>{{customMethod(lastName)}}</p>
+<h2>{{firstname}} {{lastName}} {{age}}岁</h2>
+
+  </div>
+  <script src="https://unpkg.com/vue@next"></script>
+  <script>
+
+    const app=Vue.createApp({
+      data() {
+        return {
+          firstname:"wewe",
+          lastName:'Curry',
+          count:10,
+          age:12
+        }
+      },
+      methods: {
+        customMethod(str){
+          return str.split('').reverse().join(',')
+        }
+      },
+    });
+    const vm=app.mount('#root')
+    </script>
+</body>
+</html>
