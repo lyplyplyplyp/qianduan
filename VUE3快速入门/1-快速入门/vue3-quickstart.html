@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue3快速启动</title>
+    <style>
+        [v-cloak] {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <p>姓名：{{name}}</p>
+        <p>职业：{{state.work}}</p>
+        <p>年龄：{{state.age}}</p>
+        {{getMax(num1,num2)}}
+    </div>
+    <script src="https://unpkg.com/vue@next"></script>
+
+    <script>
+        const {
+            createApp,
+            ref,
+            reactive
+        } = Vue;
+        const App = {
+            setup() {
+                const name = ref("Tom")
+
+                const num1 = ref(4)
+                const num2 = ref(5)
+
+                const state = reactive({
+                    work: "前端工程师",
+                    age: 28
+                });
+
+                const getMax = () => {
+                    return num1.value > num2.value ? num1 : num2
+                }
+
+
+                return {
+                    state,
+                    name,
+                    getMax
+                };
+            },
+        };
+        createApp(App).mount("#app")
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- 引入样式 -->
+    <link rel="stylesheet" href="https://unpkg.com/browse/element-plus@2.1.8/" />
+    <script src="https://unpkg.com/element-plus/dist/index.full.js"></script>
+    <title>简易版 Vue3 TodoList</title>
+</head>
+
+<body>
+    <div id="app">
+        <div>
+            <input :value="inputValue" @input="handleInputChange" />
+            <button @click="handleClick">新增</button>
+            <hr>
+            <h3>代办事项数据列表</h3>
+            <ul>
+                <li v-for="(item ,index) in list" :key="index ">
+                    {{ item }}
+                </li>
+            </ul>
+        </div>
+    </div>
+
+
+    <script src="https://unpkg.com/vue@next"></script>
+
+
+    <script>
+        //文本框相关逻辑
+        const useInputEffect = () => {
+            const {
+                ref
+            } = Vue;
+            const inputValue = ref("");
+            const handleInputChange = (e) => {
+                inputValue.value = e.target.value;
+            }
+            return {
+                inputValue,
+                handleInputChange
+            }
+        }
+
+        //代办事项列表相关逻辑
+        const useListEffect = () => {
+                const {
+                    reactive
+                } = Vue;
+                const list = reactive([]);
+                const handleAddItem = (item) => {
+                    list.push(item.value);
+                    item.value = "";
+                }
+                return {
+                    list,
+                    handleAddItem
+                }
+
+            }
+            //App相关逻辑
+        const {
+            createApp
+        } = Vue;
+        const App = Vue.createApp({
+            //setup函数只做流程中转，引用定义好的数据和函数，并导出给模板使用
+            setup() {
+                const {
+                    inputValue,
+                    handleInputChange
+                } = useInputEffect();
+                const {
+                    list,
+                    handleAddItem
+                } = useListEffect();
+
+                const handleClick = () => {
+                    handleAddItem(inputValue);
+                }
+
+                return {
+                    inputValue,
+                    list,
+                    handleInputChange,
+                    handleAddItem,
+                    handleClick
+                };
+            },
+        });
+
+        const vm = App.mount("#app");
+    </script>
+</body>
+
+</html>
